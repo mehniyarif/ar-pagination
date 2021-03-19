@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>ar-pagination</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+</head>
+<body>
+    <div id="app" class="content-container">
+        <div class="filters">
+            <div>
+            <label for="select-limit">Enter Total Count</label>
+            <input type="number" v-model="totalItems">
+        </div>
+        <div>
+            <label for="select-limit">Enter Select Limit</label>
+            <select v-model="limit" id="select-limit">
+                <option :value="limit" v-for="(limit,key) in limits" :key="key">{{limit}}</option>
+            </select>
+        </div>
+        </div>
+        
+        <div :key="key" v-for="(value,key) in [...Array(6).keys()]">
+            <pagination :limit="limit" @offset="changeOffset(key,$event)" :color="wishColors[key]" :datalen="totalItems" :wishlength="wishlengths[key]"></pagination>  
+            <div class="description">
+                <span >Pagination {{key+1}}</span>
+                <span :key="changeKey">New Offset {{offsetResults[key]}}</span>
+            </div>          
+            
+        </div>
+    </div>
+    <script src="./app.js"></script>
+</body>
+</html>
